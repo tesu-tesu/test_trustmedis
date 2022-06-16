@@ -13,11 +13,6 @@
     <form action="<?= base_url('jadwal/tambahData') ?>" method="POST">
         <table>
             <tr>
-                <td>Jadwal Kode</td>
-                <td>:</td>
-                <td><input type="text" name="jadwal_kode"></td>
-            </tr>
-            <tr>
                 <td>Dokter</td>
                 <td>:</td>
                 <td>
@@ -43,14 +38,39 @@
                 </td>
             </tr>
             <tr>
-                <td>Jadwal Jam</td>
+                <td>Senin</td>
                 <td>:</td>
-                <td><input type="text" name="jadwal_jam"></td>
+                <td><input type="text" name="senin"></td>
             </tr>
             <tr>
-                <td>Jadwal Hari</td>
+                <td>Selasa</td>
                 <td>:</td>
-                <td><input type="text" name="jadwal_hari"></td>
+                <td><input type="text" name="selasa"></td>
+            </tr>
+            <tr>
+                <td>Rabu</td>
+                <td>:</td>
+                <td><input type="text" name="rabu"></td>
+            </tr>
+            <tr>
+                <td>Kamis</td>
+                <td>:</td>
+                <td><input type="text" name="kamis"></td>
+            </tr>
+            <tr>
+                <td>Jumat</td>
+                <td>:</td>
+                <td><input type="text" name="jumat"></td>
+            </tr>
+            <tr>
+                <td>Sabtu</td>
+                <td>:</td>
+                <td><input type="text" name="sabtu"></td>
+            </tr>
+            <tr>
+                <td>Minggu</td>
+                <td>:</td>
+                <td><input type="text" name="minggu"></td>
             </tr>
             <tr>
                 <td colspan="3"><button type="submit">Submit</button></td>

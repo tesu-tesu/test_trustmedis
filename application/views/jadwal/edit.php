@@ -14,11 +14,6 @@
         <table>
             <input type="hidden" name="jadwal_id" value="<?= $dataDetail->jadwal_id ?>">
             <tr>
-                <td>Jadwal Kodee</td>
-                <td>:</td>
-                <td><input type="text" name="jadwal_kode" value="<?= $dataDetail->jadwal_kode ?>"></td>
-            </tr>
-            <tr>
                 <td>Dokter</td>
                 <td>:</td>
                 <td>
@@ -41,19 +36,44 @@
                 </td>
             </tr>
             <tr>
-                <td>Jadwal Jam</td>
+                <td>Senin</td>
                 <td>:</td>
-                <td><input type="text" name="jadwal_jam" value="<?= $dataDetail->jadwal_jam ?>"></td>
+                <td><input type="text" name="senin" value="<?= $dataDetail->senin ?>"></td>
             </tr>
             <tr>
-                <td>Jadwal Hari</td>
+                <td>Selasa</td>
                 <td>:</td>
-                <td><input type="text" name="jadwal_hari" value="<?= $dataDetail->jadwal_hari ?>"></td>
+                <td><input type="text" name="selasa" value="<?= $dataDetail->selasa ?>"></td>
             </tr>
+            <tr>
+                <td>Rabu</td>
+                <td>:</td>
+                <td><input type="text" name="rabu" value="<?= $dataDetail->rabu ?>"></td>
+            </tr>
+            <tr>
+                <td>Kamis</td>
+                <td>:</td>
+                <td><input type="text" name="kamis" value="<?= $dataDetail->kamis ?>"></td>
+            </tr>
+            <tr>
+                <td>Jumat</td>
+                <td>:</td>
+                <td><input type="text" name="jumat" value="<?= $dataDetail->jumat ?>"></td>
+            </tr>
+            <tr>
+                <td>Sabtu</td>
+                <td>:</td>
+                <td><input type="text" name="sabtu" value="<?= $dataDetail->sabtu ?>"></td>
+            </tr>
+            <tr>
+                <td>Minggu</td>
+                <td>:</td>
+                <td><input type="text" name="minggu" value="<?= $dataDetail->minggu ?>"></td>
+            </tr>
+        </table>
             <tr>
                 <td colspan="3"><button type="submit">Submit</button></td>
             </tr>
-        </table>
     </form>
 </body>
 

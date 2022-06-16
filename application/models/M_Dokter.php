@@ -10,25 +10,25 @@ class M_Dokter extends CI_Model
         return $query->result();
     }
 
-    function insertDataDokter($data)
+    function insertData($data)
     {
         $this->db->insert('master_dokter', $data);
     }
 
-    function getDataDokterDetail($id)
+    function getDataDetail($id)
     {
         $this->db->where('pegawai_id', $id);
         $query = $this->db->get('master_dokter');
         return $query->row();
     }
 
-    function updateDataDokter($id, $data)
+    function updateData($id, $data)
     {
         $this->db->where('pegawai_id', $id);
         $this->db->update('master_dokter', $data);
     }
 
-    function deleteDataDokter($id)
+    function deleteData($id)
     {
         $this->db->where('pegawai_id', $id);
         $this->db->delete('master_dokter');

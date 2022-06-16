@@ -15,28 +15,23 @@ class Jadwal extends CI_Controller
     public function index()
     {
         $dataAllJadwal = $this->M_Jadwal->getAllData();
-        $dokter = [];
-        $poli = $this->M_Poli->getAllData();
+        $dokter = $this->M_Dokter->getAllData();
+        $poli_jadwal = [];
         $i = 0; //index poli
         $j=0; //index dokter
 
-        print('<prev>');
-        print_r(count($dataAllJadwal));
-        print('<prev>');
-
-
-        foreach ($poli as $data_poli) {
-            $poli_test[$i] = $data_poli;
-            foreach ($dataAllJadwal as $data_jadwal) {
-                if ($data_poli->unit_id == $data_jadwal->jadwal_id_unit) {
-                    $jadwal[$i][$j]['pegawai_id'] = $data_jadwal->jadwal_id_dokter;
-                    $jadwal[$i][$j]['jadwal_hari'] = $data_jadwal->jadwal_hari;
-                    $jadwal[$i][$j]['jadwal_jam'] = $data_jadwal->jadwal_jam;
-                    $j++;
-                }
-            }
-            $i++;
-        }
+        // foreach ($poli as $data_poli) {
+        //     $poli_test[$i] = $data_poli;
+        //     foreach ($dataAllJadwal as $data_jadwal) {
+        //         if ($data_poli->unit_id == $data_jadwal->jadwal_id_unit) {
+        //             $jadwal[$i][$j]['pegawai_id'] = $data_jadwal->jadwal_id_dokter;
+        //             $jadwal[$i][$j]['jadwal_hari'] = $data_jadwal->jadwal_hari;
+        //             $jadwal[$i][$j]['jadwal_jam'] = $data_jadwal->jadwal_jam;
+        //             $j++;
+        //         }
+        //     }
+        //     $i++;
+        // }
 
         // print('<pre>');
         // print_r($dataAllJadwal);
@@ -49,7 +44,7 @@ class Jadwal extends CI_Controller
         
         $i = 0;
         foreach ($dataAllJadwal as $data) {
-            $dokter[$i] = $this->M_Dokter->getDataDokterDetail($data->jadwal_id_dokter);
+            $dokter[$i] = $this->M_Dokter->getDataDetail($data->jadwal_id_dokter);
             $poli_jadwal[$i] = $this->M_Poli->getDataDetail($data->jadwal_id_unit);
             $i++;
         }
@@ -58,9 +53,7 @@ class Jadwal extends CI_Controller
         $data = array(
             'dataAllJadwal' => $dataAllJadwal,
             'dokter' => $dokter,
-            'poli' => $poli,
             'poli_jadwal' => $poli_jadwal,
-            'jadwal' => $jadwal
         );
         $this->load->view('jadwal/read', $data);
     }
@@ -95,18 +88,26 @@ class Jadwal extends CI_Controller
 
     public function tambahData()
     {
-        $kode = $this->input->post('jadwal_kode');
         $id_dokter = $this->input->post('jadwal_id_dokter');
         $id_unit = $this->input->post('jadwal_id_unit');
-        $jam = $this->input->post('jadwal_jam');
-        $hari = $this->input->post('jadwal_hari');
-
+        $senin = $this->input->post('senin');
+        $selasa = $this->input->post('selasa');
+        $rabu = $this->input->post('rabu');
+        $kamis = $this->input->post('kamis');
+        $jumat = $this->input->post('jumat');
+        $sabtu = $this->input->post('sabtu');
+        $minggu = $this->input->post('minggu');
+        
         $ArrInsert = array(
-            'jadwal_kode' => $kode,
             'jadwal_id_dokter' => $id_dokter,
             'jadwal_id_unit' => $id_unit,
-            'jadwal_jam' => $jam,
-            'jadwal_hari' => $hari,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
+            'sabtu' => $sabtu,
+            'minggu' => $minggu,
         );
 
         $this->M_Jadwal->insertData($ArrInsert);
@@ -116,19 +117,27 @@ class Jadwal extends CI_Controller
     public function editData()
     {
         $id = $this->input->post('jadwal_id');
-        $kode = $this->input->post('jadwal_kode');
         $id_dokter = $this->input->post('jadwal_id_dokter');
         $id_unit = $this->input->post('jadwal_id_unit');
-        $jam = $this->input->post('jadwal_jam');
-        $hari = $this->input->post('jadwal_hari');
+        $senin = $this->input->post('senin');
+        $selasa = $this->input->post('selasa');
+        $rabu = $this->input->post('rabu');
+        $kamis = $this->input->post('kamis');
+        $jumat = $this->input->post('jumat');
+        $sabtu = $this->input->post('sabtu');
+        $minggu = $this->input->post('minggu');
 
         $ArrUpdate = array(
             'jadwal_id' => $id,
-            'jadwal_kode' => $kode,
             'jadwal_id_dokter' => $id_dokter,
             'jadwal_id_unit' => $id_unit,
-            'jadwal_jam' => $jam,
-            'jadwal_hari' => $hari,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
+            'sabtu' => $sabtu,
+            'minggu' => $minggu,
         );
 
         $this->M_Jadwal->updateData($id, $ArrUpdate);
@@ -141,11 +150,24 @@ class Jadwal extends CI_Controller
         redirect(base_url('jadwal'));
     }
 
-    public function test() 
+    public function download() 
     {
-		$data['jadwal'] = $this->M_Jadwal->getAllData();
+        $dataAllJadwal = $this->M_Jadwal->getAllData();
+
+        $i = 0;
+        foreach ($dataAllJadwal as $data) {
+            $dokter[$i] = $this->M_Dokter->getDataDokterDetail($data->jadwal_id_dokter);
+            $poli_jadwal[$i] = $this->M_Poli->getDataDetail($data->jadwal_id_unit);
+            $i++;
+        }
+
+        $data = array(
+            'dataAllJadwal' => $dataAllJadwal,
+            'dokter' => $dokter,
+            'poli_jadwal' => $poli_jadwal,
+        );  
 		$this->load->library('pdf');
-		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-jadwal.pdf";
 		$this->pdf->load_view('pdf/laporan_jadwal', $data);
         var_dump("halo");

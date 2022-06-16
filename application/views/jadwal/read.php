@@ -11,45 +11,12 @@
 <body>
     <h1>Data Jadwal</h1>
 
+    <br>
+    
     <a href="<?= base_url(('/jadwal/tambah_page')) ?>">Tambah Data</a>
-    <br>
-    <table border="1">
-        <tr>
-            <th>No</th>
-            <th>Dokter</th>
-            <th>Poli</th>
-            <th>Jam</th>
-            <th>Hari</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        $no = 0;
-        foreach ($dataAllJadwal as $row) {
-        ?>
-            <tr>
-                <td><?= ++$no ?></td>
-                <td><?= $dokter[($no - 1)]->pegawai_nama ?></td>
-                <td><?= $poli_jadwal[($no - 1)]->unit_nama ?></td>
-                <td><?= $row->jadwal_jam ?></td>
-                <td><?= $row->jadwal_hari ?></td>
-                <td><a href="<?= base_url(('/jadwal/edit_page')) ?>/<?= $row->jadwal_id ?>">Edit</a> |
-                    <a href="<?= base_url(('/jadwal/deleteData')) ?>/<?= $row->jadwal_id ?>">Delete</a>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
-
-    <?php 
-        foreach ($jadwal as $jadwal_2) {
-            foreach ($jadwal_2 as $jadwal_3) {
-                echo $jadwal_3['jadwal_hari'];
-            }
-        }
-    ?>
-
-    <br>
-    <table border="1">
-        <tr>
+    <a type="button" href="<?= base_url(('/jadwal/download')) ?>" style="margin-left: 20px;">download</a>
+    <table border="1" style="border-color: black;">
+        <tr style="background-color:#0B5394;color:#ffffff;">
             <th>No</th>
             <th>Klinik</th>
             <th>Senin</th>
@@ -59,36 +26,30 @@
             <th>Jumat</th>
             <th>Sabtu</th>
             <th>Minggu</th>
+            <th>Action</th>
         </tr>
-        <?php
-        $i = 0;
-        foreach ($jadwal as $jadwal_2) { ?>
-            <tr>
-                <td><?= $i + 1 ?></td>
-                <td><?= $poli[$i]->unit_nama ?></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+        <?php $i = 0; ?>
+        <?php foreach ($dataAllJadwal as $row) { ?>
+            <tr style="background-color: #C9DAF8;">
+                <td><?= $i++ + 1 ?></td>
+                <td colspan="1"><?= $poli_jadwal[($i - 1)]->unit_nama ?></td>
+                <td colspan="8"></td>
             </tr>
             <tr>
                 <td></td>
-                <pre>
-
-                    <td><?= print_r($jadwal_2) ?></td>
-                </pre>
-                <?php foreach ($jadwal_2 as $jadwal_3) { ?>
-                        <td>
-                            <?= $jadwal_3['jadwal_jam'] ?>
-                        </td>
-                <?php } ?>
+                <td><?= $dokter[($i - 1)]->pegawai_nama ?></td>
+                <td><?= $row->senin ?></td>
+                <td><?= $row->selasa ?></td>
+                <td><?= $row->rabu ?></td>
+                <td><?= $row->kamis ?></td>
+                <td><?= $row->jumat ?></td>
+                <td><?= $row->sabtu ?></td>
+                <td><?= $row->minggu ?></td>
+                <td ><a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url(('/jadwal/edit_page')) ?>/<?= $row->jadwal_id ?>">Edit</a> |
+                    <a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url('/jadwal/deleteData') ?>/<?= $row->jadwal_id ?>">Delete</a>
+                </td>
             </tr>
-        <?php
-            $i++;
-        } ?>
+        <?php } ?>
     </table>
 </body>
 

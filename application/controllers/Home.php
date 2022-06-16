@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$queryAllDokter = $this->M_Dokter->getDataDokter();
+		$queryAllDokter = $this->M_Dokter->getAllData();
 		$DATA = array('queryAllDokters' => $queryAllDokter);
 		$this->load->view('home', $DATA);
 	}
@@ -23,7 +23,7 @@ class Home extends CI_Controller {
 
 	public function halaman_edit($id)
 	{
-		$dokterDetail = $this->M_Dokter->getDataDokterDetail($id);
+		$dokterDetail = $this->M_Dokter->getDataDetail($id);
 		$DATA = array('dataDetail' => $dokterDetail);
 		$this->load->view('edit', $DATA);
 	}
@@ -51,7 +51,7 @@ class Home extends CI_Controller {
 			'pegawai_sip' => $sip,
 		);
 
-		$this->M_Dokter->insertDataDokter($ArrInsert);
+		$this->M_Dokter->insertData($ArrInsert);
 		redirect(base_url(''));
 	}
 
@@ -71,13 +71,13 @@ class Home extends CI_Controller {
 			'pegawai_sip' => $sip,
 		);
 
-		$this->M_Dokter->updateDataDokter($id, $ArrUpdate);
+		$this->M_Dokter->updateData($id, $ArrUpdate);
 		redirect(base_url(''));
 	}
 
 	public function deleteData($id)
 	{
-		$this->M_Dokter->deleteDataDokter($id);
+		$this->M_Dokter->deleteData($id);
 		redirect(base_url(''));
 	}
 }

@@ -6,32 +6,32 @@ class M_Jadwal extends CI_Model
 
     function getAllData()
     {
-        $query = $this->db->get('tb_jadwal_dokter');
+        $query = $this->db->get('tb_jadwal');
         return $query->result();
     }
 
     function insertData($data)
     {
-        $this->db->insert('tb_jadwal_dokter', $data);
+        $this->db->insert('tb_jadwal', $data);
     }
 
     function getDataDetail($id)
     {
         $this->db->where('jadwal_id', $id);
-        $query = $this->db->get('tb_jadwal_dokter');
+        $query = $this->db->get('tb_jadwal');
         return $query->row();
     }
 
     function updateData($id, $data)
     {
         $this->db->where('jadwal_id', $id);
-        $this->db->update('tb_jadwal_dokter', $data);
+        $this->db->update('tb_jadwal', $data);
     }
 
     function deleteData($id)
     {
         $this->db->where('jadwal_id', $id);
-        $this->db->delete('tb_jadwal_dokter');
+        $this->db->delete('tb_jadwal');
     }
 
     function getLastData()
