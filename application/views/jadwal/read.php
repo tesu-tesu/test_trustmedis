@@ -12,9 +12,11 @@
     <h1>Data Jadwal</h1>
 
     <br>
-    
+
     <a href="<?= base_url(('/jadwal/tambah_page')) ?>">Tambah Data</a>
     <a type="button" href="<?= base_url(('/jadwal/download')) ?>" style="margin-left: 20px;">download</a>
+    <br><br>
+
     <table border="1" style="border-color: black;">
         <tr style="background-color:#0B5394;color:#ffffff;">
             <th>No</th>
@@ -28,27 +30,35 @@
             <th>Minggu</th>
             <th>Action</th>
         </tr>
-        <?php $i = 0; ?>
-        <?php foreach ($dataAllJadwal as $row) { ?>
+
+        <?php
+            $no = 0;
+            foreach ($poli as $row_poli) { ?>
             <tr style="background-color: #C9DAF8;">
-                <td><?= $i++ + 1 ?></td>
-                <td colspan="1"><?= $poli_jadwal[($i - 1)]->unit_nama ?></td>
+                <td><?= $no++ + 1?></td>
+                <td colspan="1"><?= $row_poli->unit_nama  ?></td>
                 <td colspan="8"></td>
             </tr>
-            <tr>
-                <td></td>
-                <td><?= $dokter[($i - 1)]->pegawai_nama ?></td>
-                <td><?= $row->senin ?></td>
-                <td><?= $row->selasa ?></td>
-                <td><?= $row->rabu ?></td>
-                <td><?= $row->kamis ?></td>
-                <td><?= $row->jumat ?></td>
-                <td><?= $row->sabtu ?></td>
-                <td><?= $row->minggu ?></td>
-                <td ><a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url(('/jadwal/edit_page')) ?>/<?= $row->jadwal_id ?>">Edit</a> |
-                    <a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url('/jadwal/deleteData') ?>/<?= $row->jadwal_id ?>">Delete</a>
-                </td>
-            </tr>
+            <?php foreach ($jadwal as $row_jadwal) { ?>
+                <?php foreach ($row_jadwal as $row_row_jadwal) { ?>
+                    <?php if ($row_row_jadwal->jadwal_id_unit == $row_poli->unit_id) { ?>
+                        <tr>
+                            <td></td>
+                            <td><?= $row_row_jadwal->dokter->pegawai_nama ?></td>
+                            <td><?= $row_row_jadwal->senin ?></td>
+                            <td><?= $row_row_jadwal->selasa ?></td>
+                            <td><?= $row_row_jadwal->rabu ?></td>
+                            <td><?= $row_row_jadwal->kamis ?></td>
+                            <td><?= $row_row_jadwal->jumat ?></td>
+                            <td><?= $row_row_jadwal->sabtu ?></td>
+                            <td><?= $row_row_jadwal->minggu ?></td>
+                            <td><a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url(('/jadwal/edit_page')) ?>/<?= $row_row_jadwal->jadwal_id ?>">Edit</a> |
+                                <a style="margin-left: 10px ; margin-right: 10px;" href="<?= base_url('/jadwal/deleteData') ?>/<?= $row_row_jadwal->jadwal_id ?>">Delete</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
         <?php } ?>
     </table>
 </body>

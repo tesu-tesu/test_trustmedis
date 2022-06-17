@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['pegawai'] = 'pegawai';
 $route['unit'] = 'unit';
+$route['dokter'] = 'dokter';
 $route['jadwal_dokter'] = 'jadwal';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -16,44 +16,37 @@ class Jadwal extends CI_Controller
     {
         $dataAllJadwal = $this->M_Jadwal->getAllData();
         $dokter = $this->M_Dokter->getAllData();
-        $poli_jadwal = [];
-        $i = 0; //index poli
-        $j=0; //index dokter
+        $poli = $this->M_Poli->getAllData();
 
-        // foreach ($poli as $data_poli) {
-        //     $poli_test[$i] = $data_poli;
-        //     foreach ($dataAllJadwal as $data_jadwal) {
-        //         if ($data_poli->unit_id == $data_jadwal->jadwal_id_unit) {
-        //             $jadwal[$i][$j]['pegawai_id'] = $data_jadwal->jadwal_id_dokter;
-        //             $jadwal[$i][$j]['jadwal_hari'] = $data_jadwal->jadwal_hari;
-        //             $jadwal[$i][$j]['jadwal_jam'] = $data_jadwal->jadwal_jam;
-        //             $j++;
-        //         }
-        //     }
-        //     $i++;
-        // }
+        $mata = 0;
+        $jantung = 0;
+        $ginjal = 0;
+        $gigi = 0;
+        $kandungan = 0;
 
-        // print('<pre>');
-        // print_r($dataAllJadwal);
-        // print('<pre>');
-        
-        // print('<pre>');
-        // print_r($jadwal);
-        // print('<pre>');
-        // die();
-        
-        $i = 0;
-        foreach ($dataAllJadwal as $data) {
-            $dokter[$i] = $this->M_Dokter->getDataDetail($data->jadwal_id_dokter);
-            $poli_jadwal[$i] = $this->M_Poli->getDataDetail($data->jadwal_id_unit);
-            $i++;
+        foreach ($poli as $data_poli) {
+            $data_poli->poli = $this->M_Poli->getDataDetail($data_poli->unit_id);
+            $string = $data_poli->unit_nama;
+            foreach ($dataAllJadwal as $row) {
+                $row->dokter = $this->M_Dokter->getDataDetail($row->jadwal_id_dokter);
+                if ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$mata++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$jantung++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$ginjal++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$gigi++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$kandungan++] = $row;
+                }
+            }
+            
         }
 
-
         $data = array(
-            'dataAllJadwal' => $dataAllJadwal,
-            'dokter' => $dokter,
-            'poli_jadwal' => $poli_jadwal,
+            'poli' => $poli,
+            'jadwal' => $jadwal,
         );
         $this->load->view('jadwal/read', $data);
     }
@@ -153,24 +146,42 @@ class Jadwal extends CI_Controller
     public function download() 
     {
         $dataAllJadwal = $this->M_Jadwal->getAllData();
+        $dokter = $this->M_Dokter->getAllData();
+        $poli = $this->M_Poli->getAllData();
+        
+        $mata = 0;
+        $jantung = 0;
+        $ginjal = 0;
+        $gigi = 0;
+        $kandungan = 0;
 
-        $i = 0;
-        foreach ($dataAllJadwal as $data) {
-            $dokter[$i] = $this->M_Dokter->getDataDokterDetail($data->jadwal_id_dokter);
-            $poli_jadwal[$i] = $this->M_Poli->getDataDetail($data->jadwal_id_unit);
-            $i++;
+        foreach ($poli as $data_poli) {
+            $data_poli->poli = $this->M_Poli->getDataDetail($data_poli->unit_id);
+            $string = $data_poli->unit_nama;
+            foreach ($dataAllJadwal as $row) {
+                $row->dokter = $this->M_Dokter->getDataDetail($row->jadwal_id_dokter);
+                if ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$mata++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$jantung++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$ginjal++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$gigi++] = $row;
+                } elseif ($row->jadwal_id_unit == $data_poli->unit_id) {
+                    $jadwal[$string][$kandungan++] = $row;
+                }
+            }
+            
         }
 
         $data = array(
-            'dataAllJadwal' => $dataAllJadwal,
-            'dokter' => $dokter,
-            'poli_jadwal' => $poli_jadwal,
+            'poli' => $poli,
+            'jadwal' => $jadwal,
         );  
 		$this->load->library('pdf');
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-jadwal.pdf";
 		$this->pdf->load_view('pdf/laporan_jadwal', $data);
-        var_dump("halo");
-        die();
     }
 }

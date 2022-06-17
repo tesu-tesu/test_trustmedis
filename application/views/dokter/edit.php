@@ -5,32 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data</title>
+    <title>Edit Data</title>
 </head>
 
 <body>
-    <h3>Halaman Tambah Data Pasien</h3>
-    <form action="<?= base_url('home/tambahData') ?>" method="POST">
+    <h3>Edit Tambah Data Pasien</h3>
+    <form action="<?= base_url('dokter/editData') ?>" method="POST">
         <table>
             <tr>
+            <input type="hidden" name="pegawai_id" value="<?= $dataDetail->pegawai_id ?>">
                 <td>Nama</td>
                 <td>:</td>
-                <td><input type="text" name="pegawai_nama"></td>
+                <td><input type="text" name="pegawai_nama" value="<?= $dataDetail->pegawai_nama ?>"></td>
             </tr>
             <tr>
                 <td>Nomor Pegawai</td>
                 <td>:</td>
-                <td><input type="text" name="pegawai_nomor"></td>
+                <td><input type="text" name="pegawai_nomor" value="<?= $dataDetail->pegawai_nomor ?>"></td>
             </tr>
             <tr>
                 <td>Jenis Kelamin</td>
                 <td>:</td>
-                <td><input type="text" name="pegawai_jenis_kelamin"></td>
+                <td><input type="text" name="pegawai_jenis_kelamin" value="<?= $dataDetail->pegawai_jenis_kelamin ?>"></td>
             </tr>
             <tr>
                 <td>sip</td>
                 <td>:</td>
-                <td><input type="text" name="pegawai_sip"></td>
+                <td><input type="text" name="pegawai_sip" value="<?= $dataDetail->pegawai_sip ?>"></td>
             </tr>
             <tr>
                 <td colspan="3"><button type="submit">Submit</button></td>
